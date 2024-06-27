@@ -1,12 +1,18 @@
-import ListGroup from "./components/ListGroup";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import NewLogin from "./components/newLogin";
+import NewSignUp from "./components/newSignUp";
 
 function App() {
-  let items = ["New York", "San Francisco", "Tokyo", "London", "Paris"];
-
   return (
-    <div>
-      <ListGroup items={items} heading={"Cities"}/>
-    </div>
+    <BrowserRouter>
+      <div>
+
+        <Routes>
+          <Route index element={<NewLogin />} />
+          <Route path="/signup" element={<NewSignUp />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
