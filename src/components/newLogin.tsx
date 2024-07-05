@@ -2,6 +2,7 @@ import { useState, FormEvent } from "react";
 import { Link } from "react-router-dom";
 
 function newLogin() {
+  const [UserName, setuserName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [passwd, setPasswd] = useState<string>("");
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -30,7 +31,7 @@ function newLogin() {
 
     //successful login
     setIsLoggedIn(true);
-    alert("Welcome, " + email + "!");
+    // alert("Welcome, " + UserName + "!");
   };
 
   //logout
@@ -43,12 +44,10 @@ function newLogin() {
 
   // Render login form or content after successful login
   return (
-    <div className="container">
-      <div className="row justify-content-center align-items-center vh-100">
-        <div className="col-sm-3">
-          
-          {!isLoggedIn ? (
-            <div>
+    
+          <div>
+            {!isLoggedIn ? (
+              <div>
                 <h1 className="text-center">Welcome!</h1>
                 <p className="text-center">
                   <em>Please enter valid email and password to continue</em>
@@ -57,6 +56,17 @@ function newLogin() {
                   className="row gx-3 gy-2 align-items-center"
                   onSubmit={submitThis}
                 >
+                  <div className="form-group">
+                    <label htmlFor="UserName">User Name</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="UserName"
+                      placeholder="User Name"
+                      value={UserName}
+                      onChange={(e) => setuserName(e.target.value)}
+                    />
+                  </div>
                   <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Email address</label>
                     <input
@@ -111,17 +121,17 @@ function newLogin() {
                     </div>
                   </div>
                 </form>
-            </div>
-          ) : (
-            <div className="text-center">
-              <h1>Hello!</h1>
-              <p>Content to be displayed after successful login.</p>
-              <button className="btn btn-secondary" onClick={logout}>Logout</button>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
+              </div>
+            ) : (
+              <div className="text-center">
+                <h1>Hello! {UserName}</h1>
+                <p>Content to be displayed after successful login.</p>
+                <button className="btn btn-secondary" onClick={logout}>
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
   );
 }
 
