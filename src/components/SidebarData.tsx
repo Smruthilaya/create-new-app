@@ -1,8 +1,8 @@
-import React from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 import * as RiIcons from "react-icons/ri";
+import * as LuIcons from "react-icons/lu";
 
 export interface SubSubNavItem {
     title: string;
@@ -11,6 +11,7 @@ export interface SubSubNavItem {
     cName?: string;
 }
 
+
 export interface SubNavItem {
   title: string;
   path: string;
@@ -18,6 +19,7 @@ export interface SubNavItem {
   iconClosed?: JSX.Element;
   iconOpened?: JSX.Element;
   cName?: string;
+  isOpen: boolean;
   subsubNav?: SubSubNavItem[];
 }
 
@@ -27,63 +29,103 @@ export interface SidebarItem {
   icon: JSX.Element;
   iconClosed?: JSX.Element;
   iconOpened?: JSX.Element;
+  isOpen: boolean;
   subNav?: SubNavItem[];
   subsubNav?: SubSubNavItem[]
 }
 
 export const SidebarData: SidebarItem[] = [
   {
-    title: "About Us",
-    path: "/about-us",
-    icon: <AiIcons.AiFillHome />,
+    title: "Home",
+    path: "/home",
+    icon: <IoIcons.IoIosHome />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
+    isOpen: false,
+  },
+  {
+    title: "Clothing & Accessories",
+    path: "/clothing-accessories",
+    icon: <AiIcons.AiFillShop />,
+    iconClosed: <RiIcons.RiArrowDownSFill />,
+    iconOpened: <RiIcons.RiArrowUpSFill />,
+    isOpen: false,
 
     subNav: [
       {
-        title: "Our Aim",
-        path: "/about-us/aim",
-        icon: <IoIcons.IoIosPaper />,
+        title: "Men's Wear",
+        path: "/clothing-accessories/men",
+        icon: <AiIcons.AiOutlineMan />,
         iconClosed: <RiIcons.RiArrowDownSFill />,
         iconOpened: <RiIcons.RiArrowUpSFill />,
+        isOpen: false,
 
         subsubNav: [
           {
-            title: "Aim 1",
-            path: "/about-us/aim/aim1",
-            icon: <IoIcons.IoIosPaper />,
+            title: "Formals",
+            path: "/clothing-accessories/men/formals",
+            icon: <LuIcons.LuBookmark />,
           },
           {
-            title: "Aim 2",
-            path: "/about-us/aim/aim2",
-            icon: <IoIcons.IoIosPaper />,
+            title: "Casuals",
+            path: "/clothing-accessories/men/casuals",
+            icon: <LuIcons.LuBookmark />,
+          },
+          {
+            title: "Accessories",
+            path: "/clothing-accessories/men/accessories",
+            icon: <LuIcons.LuBookmark />,
           },
         ],
       },
       {
-        title: "Our Vision",
-        path: "/about-us/vision",
-        icon: <IoIcons.IoIosPaper />,
+        title: "Women's Wear",
+        path: "/clothing-accessories/women",
+        icon: <AiIcons.AiOutlineWoman />,
+        iconClosed: <RiIcons.RiArrowDownSFill />,
+        iconOpened: <RiIcons.RiArrowUpSFill />,
+        isOpen: false,
+
+        subsubNav: [
+          {
+            title: "Formals",
+            path: "/clothing-accessories/women/formals",
+            icon: <LuIcons.LuBookmark />,
+          },
+          {
+            title: "Dresses",
+            path: "/clothing-accessories/women/dresses",
+            icon: <LuIcons.LuBookmark />,
+          },
+          {
+            title: "Accessories",
+            path: "/clothing-accessories/women/accessories",
+            icon: <LuIcons.LuBookmark />,
+          },
+        ],
       },
     ],
   },
   {
-    title: "Events",
-    path: "/events",
-    icon: <FaIcons.FaEnvelopeOpenText />,
+    title: "Orders",
+    path: "/orders",
+    icon: <IoIcons.IoIosCart />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
+    isOpen: false,
 
     subNav: [
       {
-        title: "Event 1",
-        path: "/events/events1",
-        icon: <IoIcons.IoIosPaper />,
+        title: "Completed",
+        path: "/orders/completed",
+        icon: <FaIcons.FaCheckCircle />,
+        isOpen: false,
       },
       {
-        title: "Event 2",
-        path: "/events/events2",
-        icon: <IoIcons.IoIosPaper />,
+        title: "Pending",
+        path: "/orders/pending",
+        icon: <RiIcons.RiAlarmLine />,
+        isOpen: false,
       },
     ],
   },
@@ -91,5 +133,6 @@ export const SidebarData: SidebarItem[] = [
     title: "Contact",
     path: "/contact",
     icon: <FaIcons.FaPhone />,
+    isOpen: false,
   },
 ];

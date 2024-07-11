@@ -1,5 +1,6 @@
 import { useState, FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Home from "./home";
 
 function newLogin() {
   const [UserName, setuserName] = useState<string>("");
@@ -7,6 +8,8 @@ function newLogin() {
   const [passwd, setPasswd] = useState<string>("");
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+
+  const navigate = useNavigate();
 
   const submitThis = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,7 +34,8 @@ function newLogin() {
 
     //successful login
     setIsLoggedIn(true);
-    // alert("Welcome, " + UserName + "!");
+    setuserName(email);
+    navigate("/home");
   };
 
   //logout
@@ -44,10 +48,12 @@ function newLogin() {
 
   // Render login form or content after successful login
   return (
-    
-          <div>
+    <>
+      <div className="container">
+        <div className="row justify-content-center align-items-center vh-100">
+          <div className="col-sm-3">
             {!isLoggedIn ? (
-              <div>
+              <>
                 <h1 className="text-center">Welcome!</h1>
                 <p className="text-center">
                   <em>Please enter valid email and password to continue</em>
@@ -121,17 +127,14 @@ function newLogin() {
                     </div>
                   </div>
                 </form>
-              </div>
+              </>
             ) : (
-              <div className="text-center">
-                <h1>Hello! {UserName}</h1>
-                <p>Content to be displayed after successful login.</p>
-                <button className="btn btn-secondary" onClick={logout}>
-                  Logout
-                </button>
-              </div>
+              <Home UserName={UserName} isLoggedIn={isLoggedIn} logout={logout} />
             )}
           </div>
+        </div>
+      </div>
+    </>
   );
 }
 
