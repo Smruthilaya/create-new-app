@@ -1,6 +1,6 @@
 import { useState, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Home from "./home";
+import Home from "./pages/home";
 
 function NewSignUp() {
   const [firstName, setFirstName] = useState("");

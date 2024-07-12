@@ -1,9 +1,8 @@
-import Sidebar from "../Sidebar";
 
 const Men = () => {
   return (
     <>
-      <Sidebar />
+      {/* <Sidebar /> */}
       <div className="container-fluid d-flex flex-column align-items-center justify-content-center vh-100">
         <div className="row">
           <div className="col-sm-3"></div>

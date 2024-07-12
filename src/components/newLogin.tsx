@@ -1,6 +1,6 @@
 import { useState, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Home from "./home";
+import Home from "./pages/home";
 
 function newLogin() {
   const [UserName, setuserName] = useState<string>("");
@@ -129,7 +129,11 @@ function newLogin() {
                 </form>
               </>
             ) : (
-              <Home UserName={UserName} isLoggedIn={isLoggedIn} logout={logout} />
+              <Home
+                UserName={UserName}
+                isLoggedIn={isLoggedIn}
+                logout={logout}
+              />
             )}
           </div>
         </div>
