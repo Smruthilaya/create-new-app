@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { SidebarItem, SubNavItem, SubSubNavItem } from "./SidebarData";
 
@@ -17,8 +17,7 @@ const SidebarLink = styled(Link)`
     background: #252831;
     border-left: 4px solid white;
     cursor: pointer;
-    color: white; 
-    
+    color: white;
   }
 `;
 
@@ -39,17 +38,20 @@ const DropdownLink = styled(Link)`
     border-left: 4px solid white;
     cursor: pointer;
     color: white;
-
   }
 `;
 
 interface SubMenuProps {
   item: SidebarItem | SubNavItem | SubSubNavItem;
+  handleClick: (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    item: SidebarItem | SubNavItem | SubSubNavItem
+  ) => void;
 }
 
 const SubMenu: React.FC<SubMenuProps> = ({ item }) => {
   const [subnav, setSubnav] = useState(false);
-
+  const navigate = useNavigate();
   const toggleSubnav = () => setSubnav(!subnav);
 
   const hasSubNav = (
@@ -58,11 +60,22 @@ const SubMenu: React.FC<SubMenuProps> = ({ item }) => {
     return "subNav" in item || "subsubNav" in item;
   };
 
+  const handleItemClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    item: SidebarItem | SubNavItem | SubSubNavItem
+  ) => {
+    event.preventDefault();
+    if (hasSubNav(item)) {
+      toggleSubnav();
+    } else {
+      navigate(item.path);
+    }
+  };
   return (
     <>
       <SidebarLink
         to={item.path}
-        onClick={hasSubNav(item) ? toggleSubnav : undefined}
+        onClick={(event) => handleItemClick(event, item)}
       >
         <div>
           {item.icon}
@@ -79,18 +92,22 @@ const SubMenu: React.FC<SubMenuProps> = ({ item }) => {
       {subnav && (
         <div style={{ paddingLeft: "20px" }}>
           {hasSubNav(item) &&
-            ("subNav" in item ? (
-              item.subNav!.map((subItem: SubNavItem, index: number) => (
-                <SubMenu item={subItem} key={index} />
-              ))
-            ) : (
-              item.subsubNav!.map((subsubItem: SubSubNavItem, index: number) => (
-                <DropdownLink to={subsubItem.path} key={index}>
-                  {subsubItem.icon}
-                  <SidebarLabel>{subsubItem.title}</SidebarLabel>
-                </DropdownLink>
-              ))
-            ))}
+            ("subNav" in item
+              ? item.subNav!.map((subItem: SubNavItem, index: number) => (
+                  <SubMenu
+                    item={subItem}
+                    key={index}
+                    handleClick={(event) => handleItemClick(event, subItem)}
+                  />
+                ))
+              : item.subsubNav!.map(
+                  (subsubItem: SubSubNavItem, index: number) => (
+                    <DropdownLink to={subsubItem.path} key={index}>
+                      {subsubItem.icon}
+                      <SidebarLabel>{subsubItem.title}</SidebarLabel>
+                    </DropdownLink>
+                  )
+                ))}
         </div>
       )}
     </>

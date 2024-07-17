@@ -1,4 +1,3 @@
-import Sidebar from "../Sidebar";
 import { useNavigate } from "react-router-dom";
 
 interface HomeProps {
@@ -11,12 +10,11 @@ function Home({ UserName, isLoggedIn, logout }: HomeProps) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout(); // Call the logout function passed from props
-    navigate("/"); // Redirect to the login page or another appropriate route
+    logout();
+    navigate("/");
   };
   return (
     <>
-      {/* <Sidebar/> */}
       <div className="container-fluid d-flex flex-column align-items-center justify-content-center vh-100">
         <div className="row">
           <div className="col-sm-3"></div>

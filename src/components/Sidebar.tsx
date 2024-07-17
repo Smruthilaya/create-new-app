@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { IconContext } from "react-icons/lib";
-import { SidebarData, SidebarItem } from "./SidebarData";
+import {
+  SidebarData,
+  SidebarItem,
+  SubNavItem,
+  SubSubNavItem,
+} from "./SidebarData";
 import SubMenu from "./subMenu";
 
 const Nav = styled.div`
@@ -48,7 +53,18 @@ const SidebarWrap = styled.div`
 const Sidebar: React.FC = () => {
   const [sidebar, setSidebar] = useState(false);
 
+  const navigate = useNavigate();
+
   const showSidebar = () => setSidebar(!sidebar);
+
+  const handleItemClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    item: SidebarItem | SubNavItem | SubSubNavItem
+  ) => {
+    if (!("subNav" in item) && !("subsubNav" in item)) {
+      navigate(item.path);
+    }
+  };
 
   return (
     <>
@@ -69,12 +85,16 @@ const Sidebar: React.FC = () => {
           </NavIcon>
           <SidebarWrap>
             {SidebarData.map((item: SidebarItem, index: number) => (
-              <SubMenu item={item} key={index} />
+              <SubMenu
+                item={item}
+                key={index}
+                handleClick={(event) => handleItemClick(event, item)}
+              />
             ))}
           </SidebarWrap>
         </SidebarNav>
       </IconContext.Provider>
-      <Outlet/>
+      <Outlet />
     </>
   );
 };
