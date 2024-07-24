@@ -1,0 +1,72 @@
+@import "loginSignup";
+@import "pages";
+@import "sidebar";
+
+$font-size-base: 1.5rem;
+
+.root {
+  font-family: Segoe UI;
+}
+
+h1,
+.h1 {
+  font-size: $font-size-base * 2;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+h2,
+.h2 {
+  font-size: $font-size-base * 1.5;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.text {
+  text-align: center;
+}
+
+.gap {
+  padding-top: 2.5px;
+  padding-bottom: 2.5px;
+}
+
+@mixin container {
+  max-width: 30%;
+  margin: auto;
+  justify-content: center;
+}
+
+.containers {
+  @include container();
+  display: flex;
+  align-items: center;
+  height: 90vh;
+}
+
+// .sidebarLabel {
+//   margin: auto;
+// }
+
+.sidebarLabel {
+  margin-left: 16px;
+}
+
+
+.menu {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.test {
+  // display: flex;
+  // align-items: center;
+  margin-left: auto;
+  margin-right: 1rem;
+  float: right;
+  
+}

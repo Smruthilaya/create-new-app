@@ -49,95 +49,84 @@ function newLogin() {
   // Render login form or content after successful login
   return (
     <>
-      <div className="container">
+      {/* <div className="container">
         <div className="row justify-content-center align-items-center vh-100">
-          <div className="col-sm-3">
-            {!isLoggedIn ? (
-              <>
-                <h1 className="text-center">Welcome!</h1>
-                <p className="text-center">
+          <div className="col-sm-3"> */}
+      <div className="containers">
+        <div>
+          {!isLoggedIn ? (
+            <>
+              <div className="text">
+                <h1>Welcome!</h1>
+                <p>
                   <em>Please enter valid email and password to continue</em>
                 </p>
-                <form
-                  className="row gx-3 gy-2 align-items-center"
-                  onSubmit={submitThis}
-                >
-                  <div className="form-group">
-                    <label htmlFor="UserName">User Name</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="UserName"
-                      placeholder="User Name"
-                      value={UserName}
-                      onChange={(e) => setuserName(e.target.value)}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="exampleInputEmail1">Email address</label>
-                    <input
-                      type="email"
-                      className="form-control"
-                      id="exampleInputEmail1"
-                      placeholder="Enter email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="exampleInputPassword1">Password</label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      id="exampleInputPassword1"
-                      placeholder="Password"
-                      value={passwd}
-                      onChange={(e) => setPasswd(e.target.value)}
-                    />
-                  </div>
-                  {error && <p style={{ color: "red" }}>{error}</p>}
-                  <div className="row align-items-center mt-3 justify-content-center">
-                    <div className="col-auto">
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          id="autoSizingCheck2"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="autoSizingCheck2"
-                        >
-                          Remember me
-                        </label>
-                      </div>
-                    </div>
-                    <div className="col-auto">
-                      <button className="btn btn-primary" type="submit">
-                        Login
-                      </button>
-                    </div>
-                    <div className="text-center">
-                      <p>
-                        <small>
-                          Don't have an account? Sign up{" "}
-                          <Link to="/signup">here!</Link>
-                        </small>
-                      </p>
-                    </div>
-                  </div>
-                </form>
-              </>
-            ) : (
-              <Home
-                UserName={UserName}
-                isLoggedIn={isLoggedIn}
-                logout={logout}
-              />
-            )}
-          </div>
+              </div>
+
+              <form className="formElement" onSubmit={submitThis}>
+                <div>
+                  <label htmlFor="UserName">User Name</label>
+                  <input
+                    type="text"
+                    className="formInput"
+                    id="UserName"
+                    placeholder="User Name"
+                    value={UserName}
+                    onChange={(e) => setuserName(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="exampleInputEmail1">Email address</label>
+                  <input
+                    type="email"
+                    className="formInput"
+                    id="exampleInputEmail1"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="exampleInputPassword1">Password</label>
+                  <input
+                    type="password"
+                    className="formInput"
+                    id="exampleInputPassword1"
+                    placeholder="Password"
+                    value={passwd}
+                    onChange={(e) => setPasswd(e.target.value)}
+                  />
+                </div>
+              </form>
+              {error && <p style={{ color: "red" }}>{error}</p>}
+              <div className="text">
+                <div className="gap">
+                  <input type="checkbox" id="autoSizingCheck2" />
+                  <label className="formCheck" htmlFor="autoSizingCheck2">
+                    Remember me
+                  </label>
+                </div>
+                <div className="gap">
+                  <button className="btn btn-primary" type="submit">
+                    Login
+                  </button>
+                </div>
+                <div className="text">
+                  <p>
+                    Don't have an account? Sign up{" "}
+                    <Link to="/signup">here!</Link>
+                  </p>
+                </div>
+              </div>
+            </>
+          ) : (
+            <Home UserName={UserName} isLoggedIn={isLoggedIn} logout={logout} />
+          )}
         </div>
       </div>
+      {/* </div>
+        </div>
+      </div> */}
     </>
   );
 }
